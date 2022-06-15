@@ -16,14 +16,38 @@
             background-color: solid white;
         }
         tr:hover {
-            background-color: #7CFC00;
+            background-color: #7FFF00;
         }
+
+        .button {
+          background-color: white;
+          border: none;
+          color: black;
+          border: 2px solid #555555;
+          padding: 4px 8px;
+          text-align: center;
+          text-decoration: none;
+          display: inline-block;
+          font-size: 12px;
+          margin: 4px 2px;
+          transition-duration: 0.4s;
+          cursor: pointer;
+        }
+
+
+        .disabled {
+          opacity: 0.6;
+          cursor: not-allowed;
+        }
+
+
+
     </style>
     </head>
 
     <body style="margin-top: 30px;margin-left: 30px;">
         <h1>Excel File Upload</h1>
-        <form action="{% url "myapp:index" %}" method="post" enctype="multipart/form-data">
+        <form action="{% url "myapp:index" %}" method="post" enctype="multipart/form-data" class="form-horizontal">
             {% csrf_token %}
             <input type="file"
                    title="Upload excel file"
@@ -44,8 +68,29 @@
                 {% for row in excel_data %}
                     <tr>
                         {% for cell in row %}
-                            <td>{{cell}}</td>
+                            {% if 'second' in cell %}
+                                <td>
+                                    <!-- <a href="/search" target="_blank">{{ cell|cut:"!" }}</a> -->
+                                    {% if '!' in cell %}
+                                        {{cell|cut:"second!"}}
+                                        <form action="{% url 'myapp:search' %}" method="post">
+                                        {% csrf_token %}
+                                        <button type="submit" 
+                                                name='results_btn' 
+                                                class="button"
+                                                value="{{cell|cut:"second!"}}">Results</button>
+                                        </form>
+                                    {% else %}
+                                        {{cell|cut:"second"}}
+                                        <!-- <button class="button disabled">Results</button> -->
+                                    {% endif %}
+                                </td>
+                            {% else %}
+                                <td>{{cell}}</td>
+                            {% endif %} 
                         {% endfor %}
+                        <td>
+                        </td>
                     </tr>
                 {% endfor %}
             </tbody>

@@ -1,10 +1,10 @@
-<html>
+<html lang="ja">
     <head>
         <title>
-            Excel File Upload
+            エクセル　アップロード
         </title>
     <style> 
-        table, td, thead, tr{
+        table, td, th{
             border: 1px solid black;
             border-collapse: collapse;
             font-size: 80%;
@@ -24,7 +24,7 @@
           border: none;
           color: white;
           border: 2px #555555;
-          padding: 4px 4px;
+          padding: 4px 8px;
           text-align: center;
           transition-duration: 0.4s;
           text-decoration: none;
@@ -33,7 +33,6 @@
           font-weight: bold;
           margin: 4px 2px;
           transition-duration: 0.4s;
-          cursor: pointer;
         }
       
         .button:hover {
@@ -44,18 +43,27 @@
         .disabled {
           opacity: 0.3;
           pointer-events: none;
-          border: 2px solid;
+        }
+
+        .cursor-disable {
           cursor: not-allowed;
         }
 
-
+        .submit-btn {
+          border: 1px solid black; 
+          background-color: #1E90FF; 
+          padding:5px; 
+          color: white;
+          border-radius: 2px; 
+          cursor: pointer;
+        }
 
     </style>
     </head>
 
-    <body style="margin-top: 30px;margin-left: 30px;">
-        <h1>Excel File Upload</h1>
-        <form action="{% url "myapp:index" %}" method="post" enctype="multipart/form-data" class="form-horizontal">
+    <body lang="ja" style="margin-top: 30px;margin-left: 30px;">
+        <h1>エクセル　アップロード</h1>
+        <form action="{% url "myapp:index" %}" lang="ja" method="post" enctype="multipart/form-data" class="form-horizontal">
             {% csrf_token %}
             <input type="file"
                    title="Upload excel file"
@@ -64,8 +72,8 @@
                    required="required">
             <p>
             <input type="submit"
-                   value="Upload"
-                   style="border: 1px solid green; padding:5px; border-radius: 2px; cursor: pointer;">
+                   value="アップロード"
+                   class="submit-btn">
         </form>
 
         <p></p>
@@ -100,14 +108,15 @@
                                         <form action="{% url 'myapp:search' %}" method="post">
                                         {% csrf_token %}
                                         <button type="submit" 
+                                                style="cursor: pointer;"
                                                 name='results_btn' 
                                                 class="button"
-                                                value="{{cell|cut:"second!"}}">Search Results</button>
+                                                value="{{cell|cut:"second!"}}">検索結果</button>
                                         </form>
                                     {% else %}
                                         {{cell|cut:"second"}}
-                                        <form>
-                                        <button class="button disabled">Search Results</button>
+                                        <form class="cursor-disable">
+                                        <button class="button disabled">検索結果</button>
                                         </form> 
                                     {% endif %}
                                 </td>
@@ -115,8 +124,6 @@
                                 <td>{{cell}}</td>
                             {% endif %} 
                         {% endfor %}
-                        <td>
-                        </td>
                     </tr>
                 {% endfor %}
             </tbody>

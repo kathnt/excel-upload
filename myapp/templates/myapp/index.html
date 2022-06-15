@@ -4,10 +4,10 @@
             Excel File Upload
         </title>
     <style> 
-        table, td {
+        table, td, thead, tr{
             border: 1px solid black;
             border-collapse: collapse;
-            font-size: 70%;
+            font-size: 80%;
         }
         tr:nth-of-type(even) {
             background-color: #96D4D4;
@@ -20,23 +20,31 @@
         }
 
         .button {
-          background-color: white;
+          background-color: #555555;
           border: none;
-          color: black;
-          border: 2px solid #555555;
-          padding: 4px 8px;
+          color: white;
+          border: 2px #555555;
+          padding: 4px 4px;
           text-align: center;
+          transition-duration: 0.4s;
           text-decoration: none;
           display: inline-block;
           font-size: 12px;
+          font-weight: bold;
           margin: 4px 2px;
           transition-duration: 0.4s;
           cursor: pointer;
         }
-
+      
+        .button:hover {
+          background-color: white;
+          color: #555555;
+        }
 
         .disabled {
-          opacity: 0.6;
+          opacity: 0.3;
+          pointer-events: none;
+          border: 2px solid;
           cursor: not-allowed;
         }
 
@@ -64,6 +72,22 @@
         <hr>
 
         <table>
+            <thead>
+            {% for hd in headers %}
+                <tr>
+                    {% for cell in hd %}
+                        {% if 'second' in cell %}
+                            <th>{{cell|cut:"second"}}</th>
+                        {% elif '!' in cell %}
+                            <th>{{cell|cut:"!"}}</th>
+                        {% else %}
+                            <th>{{cell}}</th>
+                        {% endif %}
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+            </thead>
+
             <tbody>
                 {% for row in excel_data %}
                     <tr>
@@ -78,11 +102,13 @@
                                         <button type="submit" 
                                                 name='results_btn' 
                                                 class="button"
-                                                value="{{cell|cut:"second!"}}">Results</button>
+                                                value="{{cell|cut:"second!"}}">Search Results</button>
                                         </form>
                                     {% else %}
                                         {{cell|cut:"second"}}
-                                        <!-- <button class="button disabled">Results</button> -->
+                                        <form>
+                                        <button class="button disabled">Search Results</button>
+                                        </form> 
                                     {% endif %}
                                 </td>
                             {% else %}

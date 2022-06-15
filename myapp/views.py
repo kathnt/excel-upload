@@ -52,8 +52,10 @@ def index(request):
                 row_data.append(value)
                 #print(cell.value)
             excel_data.append(row_data)
-
-        return render(request, 'myapp/index.html', {"excel_data":excel_data})
+        headers = list()
+        for i in range(3):
+            headers.append(excel_data.pop(0))
+        return render(request, 'myapp/index.html', {"excel_data":excel_data, "headers":headers})
 
 
 def search(request):

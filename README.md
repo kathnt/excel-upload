@@ -1,5 +1,12 @@
 ## Uploading and processing Excel files in Django
 
+- Upload Excel files to create interactive tables in browser
+
+
+---
+
+
+
 - Clone this repo to your system
 
 - Install the dependencies using `pip install -r requirement.txt`

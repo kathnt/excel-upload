@@ -8,7 +8,6 @@
 
 - Go to `localhost:8000` 
 
-- Based on
-    https://www.pythoncircle.com/post/591/how-to-upload-and-process-the-excel-file-in-django/
-- Repo
-    https://github.com/anuragrana/excel-file-upload-django/blob/master/excel-django.png
+- References
+     - https://www.pythoncircle.com/post/591/how-to-upload-and-process-the-excel-file-in-django/
+     - https://github.com/anuragrana/excel-file-upload-django/blob/master/excel-django.png

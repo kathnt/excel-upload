@@ -1,4 +1,4 @@
-## Uploading and processing the Excel file in Django
+## Uploading and processing Excel files in Django
 
 - Clone this repo to your system
 
